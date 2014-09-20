@@ -84,8 +84,8 @@ public class RobotMap {
     //      (4 in * PI)
     //      -----------
     //      wheel rot
-    // For every one wheel rotation we get one rotation of the 64 tooth gear (A)
-    // For every 64 teeth on gear (A) we get 20 teeth on gear (B), for one gear (B) rotation
+    // For every one wheel rotation we get one rotation of the 44 tooth gear (A)
+    // For every 44 teeth on gear (A) we get 40 teeth on gear (B), for one gear (B) rotation
     
     // For every gear (B) rotation we get one rotation of the 36 tooth gear (C)
     // For every 36 teeth on gear (C) we get 12 teeth on gear (D), for one gear (D) rotation
@@ -96,12 +96,12 @@ public class RobotMap {
     
     // To compute ft / encoder pulse:
     
-    // (4.125 * PI) in    1 ft     1 A rot     20 teeth    1 B rot     1 C rot    12 teeth     1 encoder rot
+    // (4.125 * PI) in    1 ft     1 A rot     40 teeth    1 B rot     1 C rot    12 teeth     1 encoder rot
     //   ------------- * ------ * ---------- * -------- * --------- * --------- * --------- * --------------
-    //     1 wheel rot    12 in    64 teeth    1 B rot     1 C rot    36 teeth     1 D rot      250 pulses
+    //     1 wheel rot    12 in    44 teeth    1 B rot     1 C rot    36 teeth     1 D rot      250 pulses
     //
     // Result = 0.0004363323129
-    public static final double DRIVE_ENCODER_FEET_PER_PULSE = (57.0 / 48.0) * (4.125 * Math.PI) * (1.0 / 12.0) * (1.0 / 64.0) * (20.0 / 1.0) * (1.0 / 36.0) * (12.0 / 1.0) * (1.0 / 250.0);
+    public static final double DRIVE_ENCODER_FEET_PER_PULSE = (57.0 / 48.0) * (4.125 * Math.PI) * (1.0 / 12.0) * (1.0 / 44.0) * (40.0 / 1.0) * (1.0 / 36.0) * (12.0 / 1.0) * (1.0 / 250.0);
     
     //public static final double DRIVE_ENCODER_INCHES_PER_PULSE = (4.5 * Math.PI) * (1.0 / 250.0);
     

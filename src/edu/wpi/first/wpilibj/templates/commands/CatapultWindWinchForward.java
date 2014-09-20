@@ -14,28 +14,27 @@ public class CatapultWindWinchForward extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        // None currently
+        catapult.windCatapultForward();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        // A method from Catapult that winds the catapult to prepare to shoot
-        if (!catapult.getCatapultSwitchState()) {
-            catapult.windCatapultForward();
-        }
-        else {
-            catapult.windCatapultWindStop();
-        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        // getCatapultSwitchState returns false when closed
+        if (catapult.getCatapultSwitchState() == false) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        // None currently
+        catapult.windCatapultWindStop();
     }
 
     // Called when another command which requires one or more of the same

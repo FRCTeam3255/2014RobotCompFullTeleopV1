@@ -10,6 +10,7 @@ public class CatapultFireAndRewind extends CommandGroup {
 
     public CatapultFireAndRewind() {
         addSequential(new CatapultReleaseAndReturnLatch());
+        addSequential(new DoDelay(1.0));
         addSequential(new CatapultWindAndUnwind());
     }
 }

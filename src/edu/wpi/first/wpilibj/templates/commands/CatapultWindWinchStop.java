@@ -20,13 +20,12 @@ public class CatapultWindWinchStop extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        // None currently
+        // Sets the Catapult speed to 0.0
+        catapult.windCatapultWindStop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        // Sets the Catapult speed to 0.0
-        catapult.windCatapultWindStop();
     }
 
     // Make this return true when this Command no longer needs to run execute()

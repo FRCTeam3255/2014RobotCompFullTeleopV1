@@ -30,11 +30,9 @@ public class Telemetry extends Subsystem {
 
     public void update() {
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
-        autoChooser.addObject("Shoot 1 Hot & Drive", new AutoShoot1Drive());
+        autoChooser.addDefault("Shoot 1 Hot & Drive", new AutoShoot1Drive());
         autoChooser.addObject("Shoot 2 & Drive", new AutoShoot2Drive());
         autoChooser.addObject("Shoot 3", new AutoShoot3());
-        
-        autoChooser.addDefault("Shoot 1 Hot & Drive", new AutoShoot1Drive());
         
         autoCommand = (Command) autoChooser.getSelected();
         
@@ -59,9 +57,10 @@ public class Telemetry extends Subsystem {
         
         // show Catapult telemetry
         SmartDashboard.putBoolean("Catapult Latch State", CommandBase.catapult.catapultLatchState());
-        SmartDashboard.putNumber("Catapult Winch Speed", CommandBase.catapult.catapultWindSpeed());
-        SmartDashboard.putNumber("Catapult Encoder Value", CommandBase.catapult.catapultEncoderValue());
         SmartDashboard.putBoolean("Catapult Switch State", CommandBase.catapult.catapultSwitchState());
+        SmartDashboard.putNumber("Catapult Winch Speed", CommandBase.catapult.catapultWindSpeed());
+        SmartDashboard.putNumber("Catapult Unwind Rotations", CommandBase.catapult.getUnwindRotations());
+        SmartDashboard.putNumber("Catapult Encoder Value", CommandBase.catapult.catapultEncoderValue());
         
         // show Stinger telemetry
         SmartDashboard.putBoolean("Stinger Position", CommandBase.stinger.stingerDeployState());  

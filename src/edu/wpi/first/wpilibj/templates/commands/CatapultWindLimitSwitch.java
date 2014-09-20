@@ -23,22 +23,13 @@ public class CatapultWindLimitSwitch extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    /**
-     * Set the setpoint to the stored value and enable PID on the catapult.
-     */
     protected void initialize() {
         setTimeout(m_timeout);
-        if (catapult.getCatapultSwitchState()) {
-            this.speed = RobotMap.CATAPULT_WINCH_WIND_SPEED;
-        }
-        else {
-            this.speed = 0.0;
-        }
+        catapult.windCatapultForward();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        catapult.setCatapultWindSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,14 +37,16 @@ public class CatapultWindLimitSwitch extends CommandBase {
      * @return true when it's close enough to the distance
      */
     protected boolean isFinished() {
-        if (!isTimedOut()) {
-            if (catapult.getCatapultSwitchState() == false) {
-            return (true);
-            } else {
-                return (false);
-            }
-        } else {
-            return isTimedOut();
+       if(isTimedOut()) {
+           return true;
+        }
+        
+        // getCapultSwitchState return false when closed
+        if (catapult.getCatapultSwitchState() == false) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 
 /**
@@ -151,6 +152,14 @@ public class Catapult extends Subsystem {
     
     public double catapultWindSpeed() {
         return catapultWinchWindSpeed;
+    }
+
+    /**
+     * Get the number of rotations that would properly unwind the catapult
+     * @return 
+     */
+    public double getUnwindRotations() {
+        return (2 * DriverStation.getInstance().getAnalogIn(1));
     }
     
     public double catapultEncoderValue() {
