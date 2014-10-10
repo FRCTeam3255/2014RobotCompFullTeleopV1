@@ -48,11 +48,11 @@ public class AutoDriveDistance extends CommandBase {
      */
     protected boolean isFinished() {
         if (forward) {
-            if ((distance - drivetrain.getLeftEncoderValue() + drivetrain.getRightEncoderValue()) / 2 >= 0) {
+            if (drivetrain.getLeftEncoderValue() >= distance) {
                 return (true);
             }
         } else {
-            if ((distance - drivetrain.getLeftEncoderValue() + drivetrain.getRightEncoderValue()) / 2 <= 0) {
+            if (drivetrain.getLeftEncoderValue() <= distance) {
                 return (true);
             }
         }

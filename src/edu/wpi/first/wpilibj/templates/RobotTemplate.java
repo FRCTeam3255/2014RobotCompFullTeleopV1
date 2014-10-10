@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.*;
 import edu.wpi.first.wpilibj.Watchdog;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,23 +25,30 @@ import edu.wpi.first.wpilibj.Watchdog;
  */
 public class RobotTemplate extends IterativeRobot {
 
-    Command autonomousCommand;
+    SendableChooser autoChooser;
+    Command autoCommand = null;
+
     
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-        // instantiate the command used for the autonomous period
-        
-        autonomousCommand = new AutoShoot1Drive();
         // Initialize all subsystems
         CommandBase.init();
+        
+        autoChooser = new SendableChooser();
+        autoChooser.addDefault("Drive & Shoot 1 Hot", new AutoShoot1Drive());
+        autoChooser.addObject("Drive PID & Shoot 1 Hot", new AutoShoot1DrivePID());
+        autoChooser.addObject("Shoot 2 & Drive", new AutoShoot2Drive());
+        autoChooser.addObject("Shoot 3", new AutoShoot3());
+        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
     }
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        autonomousCommand.start();
+        autoCommand = (Command) autoChooser.getSelected();
+        autoCommand.start();
     }
 
     /**
@@ -55,7 +64,9 @@ public class RobotTemplate extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        autonomousCommand.cancel();
+        if (autoCommand != null) {
+            autoCommand.cancel();
+        }
     }
     
     public void disabledPeriodic() {

@@ -19,28 +19,17 @@ import edu.wpi.first.wpilibj.templates.commands.TelemetryUpdate;
  */
 public class Telemetry extends Subsystem {
     // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
-    SendableChooser autoChooser;
-    Command autoCommand;
+    // here. Call these from Commands.    
     
     public Telemetry() {
-        autoChooser = new SendableChooser();
     }
 
     public void update() {
-        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
-        autoChooser.addDefault("Shoot 1 Hot & Drive", new AutoShoot1Drive());
-        autoChooser.addObject("Shoot 2 & Drive", new AutoShoot2Drive());
-        autoChooser.addObject("Shoot 3", new AutoShoot3());
-        
-        autoCommand = (Command) autoChooser.getSelected();
-        
         // show Drivetrain telemetry
         SmartDashboard.putNumber("Move Speed", CommandBase.drivetrain.driveMoveSpeed());
         SmartDashboard.putNumber("Rotate Speed", CommandBase.drivetrain.driveRotateSpeed());
-        SmartDashboard.putNumber("Drivetrain Left Encoder Value", CommandBase.drivetrain.driveEncodersLeftValue());
-        SmartDashboard.putNumber("Drivetrain Right Encoder Value", CommandBase.drivetrain.driveEncodersRightValue());
+        SmartDashboard.putNumber("Drivetrain Left Encoder Value", CommandBase.drivetrain.getLeftEncoderValue());
+        SmartDashboard.putNumber("Drivetrain Right Encoder Value", CommandBase.drivetrain.getRightEncoderValue());
         SmartDashboard.putBoolean("Gear State", CommandBase.drivetrain.gearState());
         SmartDashboard.putNumber("Gyroscope Angle", CommandBase.drivetrain.getGyroAngle());
         SmartDashboard.putNumber("X Acceleration", CommandBase.drivetrain.getAcceleration("x"));
@@ -90,9 +79,5 @@ public class Telemetry extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         this.setDefaultCommand(new TelemetryUpdate());
-    }
-    
-    public Command getAutonomousCommand() {
-        return autoCommand;
-    }
+    }    
 }

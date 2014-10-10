@@ -204,14 +204,6 @@ public class Drivetrain extends PIDSubsystem {
         resetEncoders();
     }
     
-    public double driveEncodersLeftValue() {
-        return drivetrainLeftEncoderValue;
-    }
-    
-    public double driveEncodersRightValue() {
-        return drivetrainRightEncoderValue;
-    }
-    
      public void resetGyro() {
         try {
             driveGyroscope.reset();
